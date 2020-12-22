@@ -2,23 +2,15 @@ const canvas = document.querySelector("#canvas");
 const ctx = canvas.getContext("2d");
 
 function main() {
-    const matrixOne = new Matrix([
-        [1, 4],
-        [2, 5],
-        [3, 6]
-    ]);
-
-    const matrixTwo = new Matrix([
-        [3, 8, 5],
-        [5, 2, 4]
-    ]);
-
-    const matrixThree = Matrix.mult(matrixOne, matrixTwo);
-    
-    matrixThree.print();
+    const world = new World();
+    world.draw();
 }
 
 window.onload = () => {
     console.log("Hello world!");
+    console.log("To-do:");
+    console.log("Have an array of vectors in the world");
+    console.log("Have a transformation matrix");
+    console.log("Draw the vectors and the transformed vectors in a different colour");
     main();
 }

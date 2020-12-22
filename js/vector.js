@@ -3,6 +3,10 @@ class Vector extends Matrix {
         super([values]);
     }
 
+    get x() { return this.getValues()[0]; }
+    
+    get y() { return this.getValues()[1]; }
+
     getValues() { return this.getColumn(0); }
 
     print() {

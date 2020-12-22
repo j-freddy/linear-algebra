@@ -38,6 +38,20 @@ class Matrix {
         return matrix;
     }
 
+    cloneColumn(j) {
+        return this.getColumn(j).map(x => x);
+    }
+
+    clone() {
+        let matrix = [];
+
+        for(let j = 0; j < this.getNoColumns(); j++) {
+            matrix.push(this.cloneColumn(j));
+        }
+
+        return new Matrix(matrix);
+    }
+
     scale(factor) {
         for(let i = 0; i < this.getNoColumns(); i++) {
             this.columns[i] = this.columns[i].map(x => x * factor);
@@ -62,6 +76,16 @@ class Matrix {
         }
     }
 
+    //Pre: No. of columns = 1
+    castToVector() {
+        if(this.getNoColumns() === 1) {
+            return new Vector(this.getColumn(0));
+        } else {
+            console.log("Error: Trying to convert matrix to vector"
+                + "but the matrix doesn't have 1 column");
+        }
+    }
+
     print() {
         let matrix = [];
 
@@ -70,6 +94,19 @@ class Matrix {
         }
 
         console.log(matrix);
+    }
+
+    //Pre: Both matrices have same dimensions
+    /*
+        Difference between Matrix.add([matrixOne], [matrixTwo]) and [matrix].add([matrixTwo]) is:
+        The static method returns a new matrix.
+        The non-static method modifies the original matrix.
+    */
+    static add(matrixOne, matrixTwo) {
+        let clone = matrixOne.clone();
+        clone.add(matrixTwo);
+
+        return clone;
     }
 
     //Pre: No of columns in 1st matrix = No of rows in 2nd matrix
