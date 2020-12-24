@@ -56,6 +56,8 @@ class Matrix {
         for(let i = 0; i < this.getNoColumns(); i++) {
             this.columns[i] = this.columns[i].map(x => x * factor);
         }
+
+        return this;
     }
 
     //Pre: Both matrices have same dimensions
