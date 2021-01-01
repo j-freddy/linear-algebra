@@ -1,8 +1,8 @@
 class World2D {
     origin;
     scale = new Matrix([
-        [40, 0],
-        [0, -40]
+        [100, 0],
+        [0, -100]
     ]);
     vectors;
 
@@ -14,13 +14,7 @@ class World2D {
 
     constructor() {
         this.origin = new Vector([canvas.width/2, canvas.height/2]);
-        this.vectors = [
-            new Vector([1, 0]),
-            new Vector([0, 1]),
-            new Vector([-1, 0]),
-            new Vector([0, -1]),
-            new Vector([3, 2]),
-        ];
+        this.vectors = VECTORS2;
     }
 
     drawLine(x1, y1, x2, y2, colour = "#000", width = 1) {
@@ -52,6 +46,8 @@ class World2D {
     }
 
     draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
         this.drawAxes();
         this.vectors.forEach(vector => this.drawVector(vector, "#0000ff"));
         
@@ -59,6 +55,15 @@ class World2D {
             vector => Matrix.mult(this.transformation, vector).castToVector());
 
         transformedVectors.forEach(vector => this.drawVector(vector, "#ff0000"));
-        //window.requestAnimationFrame(_ => this.draw());
+    }
+
+    tick(mouse) {
+        if(mouse.isDown) {
+            //this.origin.add(mouse.deltaPos);
+        }
+
+        this.draw();
+
+        window.requestAnimationFrame(_ => this.tick(mouse));
     }
 }

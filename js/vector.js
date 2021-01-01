@@ -9,6 +9,11 @@ class Vector extends Matrix {
 
     getValues() { return this.getColumn(0); }
 
+    moveRight(unit) { this.add(new Vector([unit, 0])); }
+    moveLeft(unit) { this.moveRight(-unit); }
+    moveUp(unit) { this.add(new Vector([0, -unit])); }
+    moveDown(unit) { this.moveUp(-unit); }
+
     print() {
         console.log(this.getValues());
     }
@@ -30,5 +35,9 @@ class Vector extends Matrix {
             console.log("Error: Trying to find dot product of 2 vectors with different dimensions");
             return;
         }
+    }
+
+    static zero() {
+        return new Vector([0, 0]);
     }
 }
