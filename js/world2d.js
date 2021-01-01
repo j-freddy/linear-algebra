@@ -1,4 +1,4 @@
-class World {
+class World2D {
     origin;
     scale = new Matrix([
         [40, 0],

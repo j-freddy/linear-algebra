@@ -2,7 +2,7 @@ const canvas = document.querySelector("#canvas");
 const ctx = canvas.getContext("2d");
 
 function main() {
-    const world = new World();
+    const world = new World2D();
     world.draw();
 }
 
