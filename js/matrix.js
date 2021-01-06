@@ -38,6 +38,24 @@ class Matrix {
         return matrix;
     }
 
+    //Pre: 2x2 matrix
+    getDeterminant() {
+        if(this.getNoRows() == 2 && this.getNoColumns() == 2) {
+            return this.columns[0][0] * this.columns[1][1] - this.columns[0][1] * this.columns[1][0];
+        } else {
+            console.log("Error: Trying to get determinant of a non 2x2 matrix");
+        }
+    }
+
+    //Pre: 2x2 matrix
+    getLinearScale() {
+        if(this.getNoRows() == 2 && this.getNoColumns() == 2) {
+            return Math.sqrt(Math.abs(this.getDeterminant()));
+        } else {
+            console.log("Error: Trying to get lienar scale of a non 2x2 matrix");
+        }
+    }
+
     cloneColumn(j) {
         return this.getColumn(j).map(x => x);
     }

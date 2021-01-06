@@ -15,8 +15,6 @@ class Mouse {
 
     get isDown() { return this.#isDown; }
 
-    get deltaPos() { return this.#deltaPos; }
-
     tick() {
         if(!this.#isMoving) {
             this.#deltaPos = Vector.zero();
@@ -40,10 +38,14 @@ class Mouse {
             this.#isMoving = true;
             this.#deltaPos = new Vector([e.clientX - this.#x, e.clientY - this.#y]);
 
-            if(this.#isDown) world.origin.add(this.#deltaPos);
+            if(this.#isDown) world.moveOrigin(this.#deltaPos);
 
             this.#x = e.clientX;
             this.#y = e.clientY;
+        }
+
+        canvas.onwheel = (e) => {
+            world.zoom(e.deltaY);
         }
     }
 }
