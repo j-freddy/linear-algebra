@@ -1,7 +1,7 @@
 class Mouse {
     #isDown;
-    #x = 0;
-    #y = 0;
+    #x = canvas.width/2;
+    #y = canvas.height/2;
     #deltaPos; //Change between current frame and previous frame
     #isMoving;
 
@@ -45,7 +45,7 @@ class Mouse {
         }
 
         canvas.onwheel = (e) => {
-            world.zoom(e.deltaY);
+            world.zoom(e.deltaY, this.#x, this.#y);
         }
     }
 }

@@ -1,5 +1,5 @@
 class World2D {
-    origin;
+    origin; //This is a vector representing the coordinates of the origin on the screen
     scale = new Matrix([
         [100, 0],
         [0, -100]
@@ -13,8 +13,12 @@ class World2D {
     ]).scale(Math.sqrt(2));
 
     constructor() {
-        this.origin = new Vector([canvas.width/2, canvas.height/2]);
+        this.origin = this.getScreenCentre();
         this.vectors = DATA.vectors;
+    }
+
+    getScreenCentre() {
+        return new Vector([canvas.width/2, canvas.height/2]);
     }
 
     getStrokeWidthFactor() {
@@ -23,16 +27,23 @@ class World2D {
 
     moveOrigin(pos) {
         this.origin.add(pos);
+        console.log("Origin: ");
+        this.origin.print();
     }
 
-    zoom(speed) {
+    zoom(speed, mouseX, mouseY) {
         let minFactor = 0.8,
             maxFactor = 1.2,
             myFactor = 1 - speed * 0.0006,
             factor = Math.min(Math.max(myFactor, minFactor), maxFactor)
 
-        console.log(this.scale.getLinearScale());
         this.scale.scale(factor);
+
+        //Displace the origin
+        let mousePos = new Vector([mouseX, mouseY]);
+
+        let newDelta = Matrix.subtract(this.origin, mousePos).castToVector().scale(factor);
+        this.origin = Matrix.add(mousePos, newDelta).castToVector();
     }
 
     drawLine(x1, y1, x2, y2, colour = "#000", width = 1) {

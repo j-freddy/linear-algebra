@@ -96,6 +96,10 @@ class Matrix {
         }
     }
 
+    subtract(matrix) {
+        this.add(Matrix.scale(matrix, -1));
+    }
+
     //Pre: No. of columns = 1
     castToVector() {
         if(this.getNoColumns() === 1) {
@@ -116,15 +120,30 @@ class Matrix {
         console.log(matrix);
     }
 
-    //Pre: Both matrices have same dimensions
     /*
-        Difference between Matrix.add([matrixOne], [matrixTwo]) and [matrix].add([matrixTwo]) is:
+        Usually, the difference between static and non-static methods in Matrix are:
         The static method returns a new matrix.
         The non-static method modifies the original matrix.
     */
+
+    static scale(matrix, factor) {
+        let clone = matrix.clone();
+        clone.scale(factor);
+        return clone;
+    }
+
+    //Pre: Both matrices have same dimensions
     static add(matrixOne, matrixTwo) {
         let clone = matrixOne.clone();
         clone.add(matrixTwo);
+
+        return clone;
+    }
+
+    //Pre: Both matrices have same dimensions
+    static subtract(matrixOne, matrixTwo) {
+        let clone = matrixOne.clone();
+        clone.subtract(matrixTwo);
 
         return clone;
     }
