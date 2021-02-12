@@ -27,8 +27,6 @@ class World2D {
 
     moveOrigin(pos) {
         this.origin.add(pos);
-        console.log("Origin: ");
-        this.origin.print();
     }
 
     zoom(speed, mouseX, mouseY) {
